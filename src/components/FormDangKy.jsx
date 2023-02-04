@@ -92,7 +92,7 @@ class FormDangKy extends Component {
             <h2 className='text-center text-white bg-dark mt-3'>
                Thông Tin Sinh Viên
             </h2>
-            <form>
+            <form onSubmit={this.resetForm}>
                <div className='row'>
                   <div className='col-6'>
                      <div className='form-group'>
@@ -156,7 +156,7 @@ class FormDangKy extends Component {
                      className='btn btn-primary mr-3'
                      onClick={this.handleOnSubmit}
                   >
-                     Thêm
+                     <i className='fa-solid fa-user-plus'></i>
                   </button>
                   <button
                      onClick={() => {
@@ -166,10 +166,10 @@ class FormDangKy extends Component {
                         };
                         this.props.dispatch(action);
                      }}
-                     type='button'
+                     type='submit'
                      className='btn btn-warning mr-3'
                   >
-                     Sửa
+                     Edit
                   </button>
                </div>
             </form>

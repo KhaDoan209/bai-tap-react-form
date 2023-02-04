@@ -2,9 +2,15 @@ const initialState = {
    mangSinhVien: [
       {
          maSV: '0001',
-         hoTen: 'Doan Kha',
+         hoTen: 'Vinh Kha',
          sdt: '012345678',
-         email: 'doanvinhkha@gmail.com',
+         email: 'tonhanhgia@gmail.com',
+      },
+      {
+         maSV: '0002',
+         hoTen: 'Duy Hy',
+         sdt: '987654321',
+         email: 'giahanhton@gmail.com',
       },
    ],
    sinhVien: {
@@ -21,6 +27,8 @@ const initialState = {
          email: '',
       },
    },
+   mangTimKiem: [],
+   mangReset: [],
 };
 
 export const sinhVienReducer = (state = initialState, action) => {
@@ -45,8 +53,22 @@ export const sinhVienReducer = (state = initialState, action) => {
             state.mangSinhVien[indexCapNhat] = action.svSua.values;
          }
          state.mangSinhVien = [...state.mangSinhVien];
-         console.log(state.mangSinhVien);
-
+         return { ...state };
+      case 'TIM':
+         state.mangReset = [];
+         state.mangTimKiem = [];
+         state.mangSinhVien.map((item) => {
+            let nameSearch = item.hoTen.replace(/\s+/g, '').toLowerCase();
+            if (nameSearch.match(action.nameToSearch)) {
+               state.mangTimKiem.push(item);
+            }
+         });
+         state.mangReset = state.mangSinhVien;
+         state.mangSinhVien = state.mangTimKiem;
+         return { ...state };
+      case 'XEM_HET':
+         state.mangTimKiem = [];
+         state.mangSinhVien = state.mangReset;
          return { ...state };
       default:
          return state;
